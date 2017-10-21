@@ -21,6 +21,13 @@ class Link:
             rest_str = ''
         return 'Link({0}{1})'.format(self.first, rest_str)
 
+    # def __str__(self):
+    #     if self.rest:
+    #         rest_str = ', ' + str(self.rest)
+    #     else:
+    #         rest_str = ''
+    #     return '{0}{1}'.format(self.first, rest_str)
+
 def map_link(f, s):
     """Apply f to each element of s."""
     if s is Link.empty:
@@ -58,7 +65,7 @@ def partitions(n, m):
         return Link.empty
     else:
         using_m = partitions(n-m, m)
-        with_m = map_link(lambda p: Link(m, p), using_m)
+        with_m = map_link(lambda p: Link(m, p), using_m) #注意这里，lambda函数的作用就是将划分出来的using_m再构成一个Link_list
         without_m = partitions(n, m-1)
         return extend_link(with_m, without_m)
 
